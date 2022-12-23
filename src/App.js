@@ -1,25 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import { useContext } from "react";
+import { Input, ListRender } from "./HelperFn";
+import listContext from "./Store";
 
-function App() {
+export default function App() {
+  const { tasks, addItemHandler } = useContext(listContext);
+
+  const nextId = tasks.length;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main">
+      <Input inputFn={addItemHandler} item={{ id: nextId, text: "" }} />
+      <ListRender items={tasks} />
     </div>
   );
 }
-
-export default App;
